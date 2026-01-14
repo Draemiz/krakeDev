@@ -13,6 +13,8 @@ saludar=function(){
     mostrarTexto("lblResultado",mensajeBienvenida);
 
     mostrarImagen("ImgSaludo","./imagenes/poke.gif");
+
+    mostrarTextoEnCaja("txtNombre","");
 }
 
 mostrarImagen=function(idComponente,rutaImagen){
@@ -22,6 +24,12 @@ mostrarImagen=function(idComponente,rutaImagen){
 }
 
 mostrarTexto = function(idComponente,mensaje){
+    let componente;
+    componente=document.getElementById(idComponente);
+    componente.innerText = mensaje;
+}
+
+mostrarTextoEnCaja = function(idComponente,mensaje){
     let componente;
     componente=document.getElementById(idComponente);
     componente.innerText = mensaje;
