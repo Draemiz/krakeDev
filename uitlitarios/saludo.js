@@ -11,6 +11,14 @@ saludar=function(){
     let mensajeBienvenida="Bienvenido "+nombre+" "+apellido;
 
     mostrarTexto("lblResultado",mensajeBienvenida);
+
+    mostrarImagen("ImgSaludo","./imagenes/poke.gif");
+}
+
+mostrarImagen=function(idComponente,rutaImagen){
+    let componente;
+    componente=document.getElementById(idComponente);
+    componente.src = rutaImagen;
 }
 
 mostrarTexto = function(idComponente,mensaje){
