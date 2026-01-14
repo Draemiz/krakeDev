@@ -110,8 +110,9 @@ limpiar = function () {
     mostrarTexto("lblDescuento", "0.0");
     mostrarTexto("lblValorIVA", "0.0");
     mostrarTexto("lblTotal", "0.0");
+
     mostrarTexto("lblResumen", "");
-    
+
     //Si funciona, hacer un commit
 }
 /* SI TODO FUNCIONA, HACER UN PUSH */
