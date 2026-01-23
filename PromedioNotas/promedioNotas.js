@@ -12,7 +12,7 @@ function calcularPromedioNotas(){
     let mensaje;
     let rutaGif;
     if (promedio < 5 && promedio > 0) {
-        // Condición 1: REPROBADO (menor a 5 y mayor a 0)
+        // Condición 1: REPROBADO (menor a 5 y menor a 0)
         mensaje = "REPROBADO";
         rutaGif = "reprobado.gif";
         
