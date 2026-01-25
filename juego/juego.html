@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Piedra Papel o Tijera</title>
+    <link rel="stylesheet" href="juego.css">
+</head>
+<body>
+
+<div class="app">
+
+    <header class="header">
+        <h1>¡JUEGA!</h1>
+    </header>
+
+    <section class="card marcador">
+        <div class="score">
+            <span class="label">USUARIO</span>
+            <span id="puntosUsuario" class="valor usuario">0</span>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="score">
+            <span class="label">COMPUTADOR</span>
+            <span id="puntosComputador" class="valor computador">0</span>
+        </div>
+    </section>
+
+    <p class="subtitulo">ELECCIÓN DEL RIVAL</p>
+
+    <div class="rival-box">
+        <img id="imgComputador" />
+    </div>
+
+    <p id="resultado" class="mensaje">¿Lista para el duelo?</p>
+
+    <section class="opciones">
+        <div class="opcion" onclick="jugar('piedra')">
+            <img src="./imagenes/piedra.png">
+            <span>PIEDRA</span>
+        </div>
+
+        <div class="opcion central" onclick="jugar('papel')">
+            <img src="./imagenes/papel.png">
+            <span>PAPEL</span>
+        </div>
+
+        <div class="opcion" onclick="jugar('tijera')">
+            <img src="./imagenes/tijera.png">
+            <span>TIJERA</span>
+        </div>
+    </section>
+    
+    <button class="btn-nueva" onclick="limpiar()">⟳ NUEVA PARTIDA</button>
+
+</div>
+
+<script src="utilitarios.js"></script>
+<script src="serviciosJuego.js"></script>
+<script src="juego.js"></script>
+
+</body>
+
+</html>
