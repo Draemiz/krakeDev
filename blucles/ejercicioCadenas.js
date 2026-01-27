@@ -34,3 +34,33 @@ ejecutarPrueba2 = function(){
     let cadenaInvertida = invertirCadena(texto);
     mostrarTexto("lblResultado", cadenaInvertida);
 }
+
+buscarLetra=function(cadena,letra){
+    let letraIterada;
+    let existeLetra = false;
+    for(let i=0;i<cadena.lenght;i++){
+        letraIterada = cadena.charAt(i);
+        if(letraIterada==letra){
+            existeLetra=true;
+        }
+    }
+    if(existeLetra==true){
+        console.log ("Existe");
+        return true;
+    }else{
+        console.log("No Existe");
+        return false;
+    }
+}
+
+contarMayusculas = function (cadena){
+    let letra;
+    let contadoorMayusculas = 0;
+    for(let i=0;i<cadena.lenght;i++){
+        letra = cadena.charAt(i);
+        if(esMayuscula(letra)){
+            contadoorMayusculas++;
+        }
+    }
+    console.log(contadoorMayusculas);
+}
