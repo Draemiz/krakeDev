@@ -201,3 +201,20 @@ limpiar = function(){
     esNuevo = false;
     deshabilitarFormularioEmpleado();
 }
+
+
+//----Pagina Rol-----
+
+buscarPorRol = function(){
+    let cedula = recuperarTexto("txtBusquedaCedulaRol");
+    let emp = buscarEmpleado(cedula);
+
+    if(emp == null){
+        alert("EMPLEADO NO EXISTE");
+        return;
+    }
+
+    mostrarTexto("infoCedula", emp.cedula);
+    mostrarTexto("infoNombre", emp.nombre + " " + emp.apellido);
+    mostrarTexto("infoSueldo", emp.sueldo);
+}
