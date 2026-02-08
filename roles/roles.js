@@ -143,6 +143,29 @@ guardar = function(){
     }
 }
 
+ejecutarBusqueda = function(){
+    let cedula = recuperarTexto("txtBusquedaCedula");
+    let emp = buscarEmpleado(cedula);
+
+    if(emp == null){
+        alert("EMPLEADO NO EXISTE");
+        return;
+    }
+
+    mostrarTextoEnCaja("txtCedula", emp.cedula);
+    mostrarTextoEnCaja("txtNombre", emp.nombre);
+    mostrarTextoEnCaja("txtApellido", emp.apellido);
+    mostrarTextoEnCaja("txtSueldo", emp.sueldo);
+
+    deshabilitarComponente("txtCedula");
+    habilitarComponente("txtNombre");
+    habilitarComponente("txtApellido");
+    habilitarComponente("txtSueldo");
+    habilitarComponente("btnGuardar");
+
+    esNuevo = false;
+}
+
 
 deshabilitarFormularioEmpleado = function(){
     deshabilitarComponente("txtCedula");
