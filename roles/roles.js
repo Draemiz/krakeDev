@@ -218,3 +218,27 @@ buscarPorRol = function(){
     mostrarTexto("infoNombre", emp.nombre + " " + emp.apellido);
     mostrarTexto("infoSueldo", emp.sueldo);
 }
+
+calcularAporteEmpleado = function(sueldo){
+    return sueldo * 0.0945;
+}
+
+calcularValorAPagar = function(sueldo, aporte, descuento){
+    return sueldo - aporte - descuento;
+}
+
+calcularRol = function(){
+    let sueldo = recuperarFloatDiv("infoSueldo");
+    let descuento = recuperarFloat("txtDescuentos");
+
+    if(isNaN(descuento) || descuento < 0 || descuento > sueldo){
+        alert("DESCUENTO INVALIDO");
+        return;
+    }
+
+    let aporte = calcularAporteEmpleado(sueldo);
+    let total = calcularValorAPagar(sueldo, aporte, descuento);
+
+    mostrarTexto("infoIESS", aporte.toFixed(2));
+    mostrarTexto("infoPago", total.toFixed(2));
+}
