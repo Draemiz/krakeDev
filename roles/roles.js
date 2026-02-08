@@ -9,11 +9,13 @@ mostrarOpcionEmpleado = function(){
     ocultarComponente("divResumen");
 }
 
+
 mostrarOpcionRol = function(){
     ocultarComponente("divEmpleado");
     mostrarComponente("divRol");
     ocultarComponente("divResumen");
 }
+
 
 mostrarOpcionResumen = function(){
     ocultarComponente("divEmpleado");
