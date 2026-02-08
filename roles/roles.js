@@ -124,6 +124,7 @@ guardar = function(){
         return;
     }
     if(esNuevo){
+        
         let emp = {};
         emp.cedula = cedula;
         emp.nombre = nombre;
@@ -139,6 +140,21 @@ guardar = function(){
             esNuevo = false;
         }else{
             alert("YA EXISTE UN EMPLEADO CON LA CEDULA " + cedula);
+        }
+    } 
+    else {
+
+        let emp = buscarEmpleado(cedula);
+
+        if(emp != null){
+            emp.nombre = nombre;
+            emp.apellido = apellido;
+            emp.sueldo = sueldo;
+
+            alert("EMPLEADO MODIFICADO EXITOSAMENTE");
+            mostrarEmpleados();
+            deshabilitarFormularioEmpleado();
+            esNuevo = false;
         }
     }
 }
