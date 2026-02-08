@@ -1,8 +1,8 @@
 
 let empleados = [
-    {cedula:"1714616123", nombre:"John", apellido:"Cena", sueldo:500.0},
-    {cedula:"0914632123", nombre:"Luisa", apellido:"Gonzalez", sueldo:900.0},
-    {cedula:"1102345678", nombre:"Alexandra", apellido:"Moreno", sueldo:800.0}
+    {cedula:"1714616123", nombre:"JOHN", apellido:"CENA", sueldo:500.0},
+    {cedula:"0914632123", nombre:"LUISA", apellido:"GONZALEZ", sueldo:900.0},
+    {cedula:"1102345678", nombre:"ALEXANDRA", apellido:"MORENO", sueldo:800.0}
 ];
 
 mostrarEmpleados = function(){
@@ -189,4 +189,15 @@ deshabilitarFormularioEmpleado = function(){
     deshabilitarComponente("txtApellido");
     deshabilitarComponente("txtSueldo");
     deshabilitarComponente("btnGuardar");
+}
+
+limpiar = function(){
+    //cajas de texto
+    mostrarTextoEnCaja("txtCedula", "");
+    mostrarTextoEnCaja("txtNombre", "");
+    mostrarTextoEnCaja("txtApellido", "");
+    mostrarTextoEnCaja("txtSueldo", "");
+
+    esNuevo = false;
+    deshabilitarFormularioEmpleado();
 }
