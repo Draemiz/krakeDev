@@ -4,6 +4,79 @@ let clientes = [
   {cedula:"23457675", nombre:"Pepe", edad:22}
 ];
 
+guardarCambios = function(){
+    let valorCedula = recuperarTexto("txtCedula");
+    let valorNombre = recuperarTexto("txtNombre");
+    let valorEdad = recuperarFloat("txtEdad");
+
+    let datosCliente = {};
+    datosCliente.cedula = valorCedula;
+    datosCliente.nombre = valorNombre;
+    datosCliente.edad = valorEdad;
+
+    modificarCliente(datosCliente);
+
+    mostrarClientes();
+}
+
+modificarCliente = function(cliente){
+    let clienteEncontrado = buscarCliente(cliente.cedula);
+    if(clienteEncontrado != null){
+        clienteEncontrado.nombre = cliente.nombre;
+        clienteEncontrado.edad = cliente.edad;
+    }
+}
+
+ejecutarBusqueda = function(){
+    let valorCedula = recuperarTexto("txtCedulaBusqueda");
+    let cliente = buscarCliente(valorCedula);
+    if(cliente == null){
+        alert("cliente no encontrado");
+    }else{
+        mostrarTextoEnCaja("txtCedula", cliente.cedula);
+        mostrarTextoEnCaja("txtNombre", cliente.nombre);
+        mostrarTextoEnCaja("txtEdad", cliente.edad);
+    }
+}
+
+crearCliente = function(){
+    let valorCedula = recuperarTexto("txtCedula");
+    let valorNombre = recuperarTexto("txtNombre");
+    let valorEdad = recuperarFloat("txtEdad");
+
+    let nuevoCliente = {};
+    nuevoCliente.cedula = valorCedula;
+    nuevoCliente.nombre = valorNombre;
+    nuevoCliente.edad = valorEdad;
+
+    agregarCliente(nuevoCliente);
+}
+
+
+agregarCliente = function(cliente){
+    let resultado;
+    resultado = buscarCliente(cliente.cedula);
+    if(resultado == null){
+        clientes.push(cliente);
+    }else{
+        alert("ya existe el cliente con la cedula: " + cliente.cedula);
+    }
+}
+
+
+buscarCliente = function(cedula){
+    let elementoCliente;
+    let clienteEncontrado = null;
+    for(let i = 0; i < clientes.length; i++){
+        elementoCliente = clientes[i];
+        if(elementoCliente.cedula == cedula){
+            clienteEncontrado = elementoCliente;
+            break;
+        }
+    }
+    return clienteEncontrado;
+}
+
 mostrarClientes = function (){
     let cmpTabla=document.getElementById("tablaClientes");
     let contenidoTabla="<table><tr>"+
