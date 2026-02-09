@@ -349,9 +349,14 @@ mostrarTotales = function () {
         totalAPagar += rol.valorAPagar;
     }
 
+    let totalNomina = totalEmpleado + totalEmpleador + totalAPagar;
+
     mostrarTexto("infoAporteEmpleado", totalEmpleado.toFixed(2));
     mostrarTexto("infoAporteEmpresa", totalEmpleador.toFixed(2));
     mostrarTexto("infoTotalPago", totalAPagar.toFixed(2));
+
+    mostrarTexto("infoTotalNomina", totalNomina.toFixed(2));
 }
+
 
 
