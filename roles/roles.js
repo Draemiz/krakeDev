@@ -56,6 +56,9 @@ mostrarOpcionResumen = function () {
     ocultarComponente("divEmpleado");
     ocultarComponente("divRol");
     mostrarComponente("divResumen");
+
+    mostrarRoles();
+    mostrarTotales();
 }
 
 ejecutarNuevo = function () {
@@ -306,6 +309,49 @@ guardarRol = function () {
     console.log(roles); // para verificar que se guardan
 }
 
+mostrarRoles = function () {
+    let divTabla = document.getElementById("tablaResumen");
 
+    let contenido = "<table border='1'>";
+    contenido += "<tr>";
+    contenido += "<th>CEDULA</th>";
+    contenido += "<th>NOMBRE</th>";
+    contenido += "<th>VALOR A PAGAR</th>";
+    contenido += "<th>APORTE EMPLEADO</th>";
+    contenido += "<th>APORTE EMPLEADOR</th>";
+    contenido += "</tr>";
+
+    for (let i = 0; i < roles.length; i++) {
+        let rol = roles[i];
+        contenido += "<tr>";
+        contenido += "<td>" + rol.cedula + "</td>";
+        contenido += "<td>" + rol.nombre + "</td>";
+        contenido += "<td>" + rol.valorAPagar.toFixed(2) + "</td>";
+        contenido += "<td>" + rol.aporteEmpleado.toFixed(2) + "</td>";
+        contenido += "<td>" + rol.aporteEmpleador.toFixed(2) + "</td>";
+        contenido += "</tr>";
+    }
+
+    contenido += "</table>";
+    divTabla.innerHTML = contenido;
+}
+
+mostrarTotales = function () {
+
+    let totalEmpleado = 0;
+    let totalEmpleador = 0;
+    let totalAPagar = 0;
+
+    for (let i = 0; i < roles.length; i++) {
+        let rol = roles[i];
+        totalEmpleado += rol.aporteEmpleado;
+        totalEmpleador += rol.aporteEmpleador;
+        totalAPagar += rol.valorAPagar;
+    }
+
+    mostrarTexto("infoAporteEmpleado", totalEmpleado.toFixed(2));
+    mostrarTexto("infoAporteEmpresa", totalEmpleador.toFixed(2));
+    mostrarTexto("infoTotalPago", totalAPagar.toFixed(2));
+}
 
 
