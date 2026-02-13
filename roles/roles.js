@@ -1,11 +1,13 @@
 
 let empleados = [
-    {cedula:"1714616123", nombre:"JOHN", apellido:"CENA", sueldo:500.0},
-    {cedula:"0914632123", nombre:"LUISA", apellido:"GONZALEZ", sueldo:900.0},
-    {cedula:"1102345678", nombre:"ALEXANDRA", apellido:"MORENO", sueldo:800.0}
+    { cedula: "1714616123", nombre: "JOHN", apellido: "CENA", sueldo: 500.0 },
+    { cedula: "0914632123", nombre: "LUISA", apellido: "GONZALEZ", sueldo: 900.0 },
+    { cedula: "1102345678", nombre: "ALEXANDRA", apellido: "MORENO", sueldo: 800.0 }
 ];
 
-mostrarEmpleados = function(){
+let roles = [];
+
+mostrarEmpleados = function () {
     let divTabla = document.getElementById("tablaEmpleados");
 
     let contenido = "<table border='1'>";
@@ -16,7 +18,7 @@ mostrarEmpleados = function(){
     contenido += "<th>SUELDO</th>";
     contenido += "</tr>";
 
-    for(let i = 0; i < empleados.length; i++){
+    for (let i = 0; i < empleados.length; i++) {
         let emp = empleados[i];
         contenido += "<tr>";
         contenido += "<td>" + emp.cedula + "</td>";
@@ -30,7 +32,7 @@ mostrarEmpleados = function(){
     divTabla.innerHTML = contenido;
 }
 
-mostrarOpcionEmpleado = function(){
+mostrarOpcionEmpleado = function () {
     mostrarComponente("divEmpleado");
     ocultarComponente("divRol");
     ocultarComponente("divResumen");
@@ -40,20 +42,26 @@ mostrarOpcionEmpleado = function(){
 }
 
 
-mostrarOpcionRol = function(){
+mostrarOpcionRol = function () {
     ocultarComponente("divEmpleado");
     mostrarComponente("divRol");
     ocultarComponente("divResumen");
+
+    deshabilitarComponente("btnGuardarRol");
 }
 
 
-mostrarOpcionResumen = function(){
+
+mostrarOpcionResumen = function () {
     ocultarComponente("divEmpleado");
     ocultarComponente("divRol");
     mostrarComponente("divResumen");
+
+    mostrarRoles();
+    mostrarTotales();
 }
 
-ejecutarNuevo = function(){
+ejecutarNuevo = function () {
     habilitarComponente("txtCedula");
     habilitarComponente("txtNombre");
     habilitarComponente("txtApellido");
@@ -68,25 +76,25 @@ ejecutarNuevo = function(){
     esNuevo = true;
 }
 
-buscarEmpleado = function(cedula){
-    for(let i = 0; i < empleados.length; i++){
-        if(empleados[i].cedula === cedula){
+buscarEmpleado = function (cedula) {
+    for (let i = 0; i < empleados.length; i++) {
+        if (empleados[i].cedula === cedula) {
             return empleados[i];
         }
     }
     return null;
 }
 
-agregarEmpleado = function(empleado){
+agregarEmpleado = function (empleado) {
     let existe = buscarEmpleado(empleado.cedula);
-    if(existe == null){
+    if (existe == null) {
         empleados.push(empleado);
         return true;
     }
     return false;
 }
 
-guardar = function(){
+guardar = function () {
 
     let cedula = recuperarTexto("txtCedula");
     let nombre = recuperarTexto("txtNombre");
@@ -103,28 +111,28 @@ guardar = function(){
     mostrarTexto("lblErrorSueldo", "");
 
     // validaciones para cedula, nombre, apelliod y sueldo 
-    if(cedula.length !== 10 || isNaN(cedula)){
+    if (cedula.length !== 10 || isNaN(cedula)) {
         mostrarTexto("lblErrorCedula", "Cédula inválida debe tener 10 caractéres");
         valido = false;
     }
-    if(nombre.length < 3 || nombre !== nombre.toUpperCase()){
+    if (nombre.length < 3 || nombre !== nombre.toUpperCase()) {
         mostrarTexto("lblErrorNombre", "Nombre inválido, debe ir todo en mayúsculas");
         valido = false;
     }
-    if(apellido.length < 3 || apellido !== apellido.toUpperCase()){
+    if (apellido.length < 3 || apellido !== apellido.toUpperCase()) {
         mostrarTexto("lblErrorApellido", "Apellido inválido, debe ir todo en mayúsculas");
         valido = false;
     }
-    if(isNaN(sueldo) || sueldo < 400 || sueldo > 5000){
+    if (isNaN(sueldo) || sueldo < 400 || sueldo > 5000) {
         mostrarTexto("lblErrorSueldo", "Sueldo inválido min $400, máx 5000");
         valido = false;
     }
 
-    if(!valido){
+    if (!valido) {
         return;
     }
-    if(esNuevo){
-        
+    if (esNuevo) {
+
         let emp = {};
         emp.cedula = cedula;
         emp.nombre = nombre;
@@ -133,20 +141,20 @@ guardar = function(){
 
         let resultado = agregarEmpleado(emp);
 
-        if(resultado){
+        if (resultado) {
             alert("EMPLEADO GUARDADO CORRECTAMENTE");
             mostrarEmpleados();
             deshabilitarFormularioEmpleado();
             esNuevo = false;
-        }else{
+        } else {
             alert("YA EXISTE UN EMPLEADO CON LA CEDULA " + cedula);
         }
-    } 
+    }
     else {
 
         let emp = buscarEmpleado(cedula);
 
-        if(emp != null){
+        if (emp != null) {
             emp.nombre = nombre;
             emp.apellido = apellido;
             emp.sueldo = sueldo;
@@ -159,11 +167,11 @@ guardar = function(){
     }
 }
 
-ejecutarBusqueda = function(){
+ejecutarBusqueda = function () {
     let cedula = recuperarTexto("txtBusquedaCedula");
     let emp = buscarEmpleado(cedula);
 
-    if(emp == null){
+    if (emp == null) {
         alert("EMPLEADO NO EXISTE");
         return;
     }
@@ -183,7 +191,7 @@ ejecutarBusqueda = function(){
 }
 
 
-deshabilitarFormularioEmpleado = function(){
+deshabilitarFormularioEmpleado = function () {
     deshabilitarComponente("txtCedula");
     deshabilitarComponente("txtNombre");
     deshabilitarComponente("txtApellido");
@@ -191,7 +199,7 @@ deshabilitarFormularioEmpleado = function(){
     deshabilitarComponente("btnGuardar");
 }
 
-limpiar = function(){
+limpiar = function () {
     //cajas de texto
     mostrarTextoEnCaja("txtCedula", "");
     mostrarTextoEnCaja("txtNombre", "");
@@ -201,3 +209,154 @@ limpiar = function(){
     esNuevo = false;
     deshabilitarFormularioEmpleado();
 }
+
+
+//----Pagina Rol-----
+
+buscarPorRol = function () {
+
+    // limpiar datos anteriores
+    mostrarTexto("infoCedula", "");
+    mostrarTexto("infoNombre", "");
+    mostrarTexto("infoSueldo", "");
+    mostrarTexto("infoIESS", "0.0");
+    mostrarTexto("infoPago", "0.0");
+
+    let cedula = recuperarTexto("txtBusquedaCedulaRol");
+    let emp = buscarEmpleado(cedula);
+
+    if (emp == null) {
+        alert("EMPLEADO NO EXISTE");
+        return;
+    }
+
+    mostrarTexto("infoCedula", emp.cedula);
+    mostrarTexto("infoNombre", emp.nombre + " " + emp.apellido);
+    mostrarTexto("infoSueldo", emp.sueldo);
+}
+
+calcularAporteEmpleado = function (sueldo) {
+    return sueldo * 0.0945;
+}
+
+calcularValorAPagar = function (sueldo, aporte, descuento) {
+    return sueldo - aporte - descuento;
+}
+
+calcularRol = function () {
+    let sueldo = recuperarFloatDiv("infoSueldo");
+    let descuento = recuperarFloat("txtDescuentos");
+
+    if (isNaN(descuento) || descuento < 0 || descuento > sueldo) {
+        alert("DESCUENTO INVALIDO");
+        return;
+    }
+
+    let aporte = calcularAporteEmpleado(sueldo);
+    let total = calcularValorAPagar(sueldo, aporte, descuento);
+
+    mostrarTexto("infoIESS", aporte.toFixed(2));
+    mostrarTexto("infoPago", total.toFixed(2));
+    habilitarComponente("btnGuardarRol");
+
+}
+
+buscarRol = function (cedula) {
+    for (let i = 0; i < roles.length; i++) {
+        if (roles[i].cedula === cedula) {
+            return roles[i];
+        }
+    }
+    return null;
+}
+
+agregarRol = function (rol) {
+    let existe = buscarRol(rol.cedula);
+    if (existe != null) {
+        alert("YA EXISTE UN ROL PARA ESTA CÉDULA");
+        return;
+    }
+
+    roles.push(rol);
+    alert("ROL GUARDADO CORRECTAMENTE");
+}
+
+calcularAporteEmpleador = function (sueldo) {
+    return sueldo * 0.1115;
+}
+
+guardarRol = function () {
+    let cedula = recuperarTextoDiv("infoCedula");
+    let nombre = recuperarTextoDiv("infoNombre");
+    let sueldo = recuperarFloatDiv("infoSueldo");
+    let valorPagar = recuperarFloatDiv("infoPago");
+    let aporteEmpleado = recuperarFloatDiv("infoIESS");
+
+    let aporteEmpleador = calcularAporteEmpleador(sueldo);
+
+    let rol = {};
+    rol.cedula = cedula;
+    rol.nombre = nombre;
+    rol.sueldo = sueldo;
+    rol.valorAPagar = valorPagar;
+    rol.aporteEmpleado = aporteEmpleado;
+    rol.aporteEmpleador = aporteEmpleador;
+
+    agregarRol(rol);
+
+    deshabilitarComponente("btnGuardarRol");
+
+    console.log(roles); // para verificar que se guardan
+}
+
+mostrarRoles = function () {
+    let divTabla = document.getElementById("tablaResumen");
+
+    let contenido = "<table border='1'>";
+    contenido += "<tr>";
+    contenido += "<th>CEDULA</th>";
+    contenido += "<th>NOMBRE</th>";
+    contenido += "<th>VALOR A PAGAR</th>";
+    contenido += "<th>APORTE EMPLEADO</th>";
+    contenido += "<th>APORTE EMPLEADOR</th>";
+    contenido += "</tr>";
+
+    for (let i = 0; i < roles.length; i++) {
+        let rol = roles[i];
+        contenido += "<tr>";
+        contenido += "<td>" + rol.cedula + "</td>";
+        contenido += "<td>" + rol.nombre + "</td>";
+        contenido += "<td>" + rol.valorAPagar.toFixed(2) + "</td>";
+        contenido += "<td>" + rol.aporteEmpleado.toFixed(2) + "</td>";
+        contenido += "<td>" + rol.aporteEmpleador.toFixed(2) + "</td>";
+        contenido += "</tr>";
+    }
+
+    contenido += "</table>";
+    divTabla.innerHTML = contenido;
+}
+
+mostrarTotales = function () {
+
+    let totalEmpleado = 0;
+    let totalEmpleador = 0;
+    let totalAPagar = 0;
+
+    for (let i = 0; i < roles.length; i++) {
+        let rol = roles[i];
+        totalEmpleado += rol.aporteEmpleado;
+        totalEmpleador += rol.aporteEmpleador;
+        totalAPagar += rol.valorAPagar;
+    }
+
+    let totalNomina = totalEmpleado + totalEmpleador + totalAPagar;
+
+    mostrarTexto("infoAporteEmpleado", totalEmpleado.toFixed(2));
+    mostrarTexto("infoAporteEmpresa", totalEmpleador.toFixed(2));
+    mostrarTexto("infoTotalPago", totalAPagar.toFixed(2));
+
+    mostrarTexto("infoTotalNomina", totalNomina.toFixed(2));
+}
+
+
+

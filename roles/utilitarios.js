@@ -50,3 +50,14 @@ deshabilitarComponente = function(idComponente){
 habilitarComponente = function(idComponente){
     document.getElementById(idComponente).disabled = false;
 }
+recuperarTextoDiv = function(idComponente){
+    return document.getElementById(idComponente).textContent;
+}
+
+recuperarFloatDiv = function(idComponente){
+    return parseFloat(recuperarTextoDiv(idComponente));
+}
+
+recuperarIntDiv = function(idComponente){
+    return parseInt(recuperarTextoDiv(idComponente));
+}
